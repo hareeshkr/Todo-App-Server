@@ -26,10 +26,19 @@ app.post('/api/v1/todos', async(req, res) =>{
         const todo = await Todo.create({
             todoTask: req.body.todoTask
         })
-        res.json({status: true, data: "todo created successfully"})
+        res.json({status: 'success'})
     }catch(error) {
         res.json({message: error.message})
     }   
+})
+
+app.delete('/api/v1/todos', async(req, res) =>{
+    try {
+        const deletedTodo = await Todo.findByIdAndDelete(req.body.id)
+        res.json({status: 'success', data: 'deleted the todo'})
+    } catch (error) {
+        res.json({message: error.message})
+    }
 })
 
 
